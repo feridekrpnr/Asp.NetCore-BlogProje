@@ -10,7 +10,7 @@ namespace DataAccessLayer.Concrete
 {
     public class Context : DbContext
     {
-        //Deneeme
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=DESKTOP-CCT1C3T;database=CoreDemoDb;integrated security=true;");
