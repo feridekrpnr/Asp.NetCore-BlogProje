@@ -9,10 +9,8 @@ namespace DataAccessLayer.Abstract
 {
     public interface IBlogDal:IGenericDal<Blog>
     {
-        //List<Blog> ListAllBlog();//categoryinin hepsini getir
-        //void AddBlog(Blog blog);
-        //void DeleteBlog(Blog blog);
-        //void UpdateBlog(Blog blog);
-        //Blog GetBbyId(int id); //id ye göre getir
+        List<Blog> GetListWithCategory(); 
+        //kategori ile birlilte listeyi getir
+
     }
 }
