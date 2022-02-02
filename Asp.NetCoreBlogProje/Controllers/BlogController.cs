@@ -18,6 +18,7 @@ namespace CoreDemo.Controllers
         }
         public IActionResult BlogReadAll(int id)
         {
+            ViewBag.i = id; //gönderdiğimiz idyi yazdırma işlemi
             var values = bm.GetBlogByID(id);
             return View(values); //dışarıdan aldıgı id ye gore işlemlerimizi gerçekleştirecek
         }
