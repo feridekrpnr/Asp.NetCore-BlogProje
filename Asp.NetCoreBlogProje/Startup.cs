@@ -27,7 +27,7 @@ namespace Asp.NetCoreBlogProje
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSession();
+        
 
             services.AddMvc(config =>
             {
@@ -73,7 +73,7 @@ namespace Asp.NetCoreBlogProje
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSession();
+            app.UseAuthentication();
 
             app.UseRouting();
 
