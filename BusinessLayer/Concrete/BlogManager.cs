@@ -20,6 +20,10 @@ namespace BusinessLayer.Concrete
         {
             _blogDal.Insert(t);
         }
+        public List<Blog> GetListWithCategoryByWriterBm(int id)
+        {
+            return _blogDal.GetListWithCategoryByWriter(id);
+        }
         public void TDelete(Blog t)
         {
             throw new NotImplementedException();
