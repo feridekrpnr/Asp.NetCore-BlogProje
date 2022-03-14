@@ -18,7 +18,7 @@ namespace BusinessLayer.Concrete
         }
         public void TAdd(Blog t)
         {
-            throw new NotImplementedException();
+            _blogDal.Insert(t);
         }
         public void TDelete(Blog t)
         {

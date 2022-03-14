@@ -1,7 +1,7 @@
 ﻿@using EntityLayer.Concrete
 @model List<Blog>
 @{
-    ViewData["Title"] = "GetBlogListByWriter";
+    ViewData["Title"] = "BlogListByWriter";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
@@ -26,8 +26,6 @@
                     <td>@item.BlogStatus</td>
                     <td><a href="#" class="btn btn-danger">Sil</a></td>                   
                     <td><a href="#" class="btn btn-warning">Düzenle</a></td>                   
-
-
                 </tr>
             }
 </table>
