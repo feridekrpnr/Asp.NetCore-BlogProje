@@ -23,7 +23,7 @@
             <td> @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</td>
             <td>@item.Category.CategoryName</td>
             <td>@item.BlogStatus</td>
-            <td><a href="#" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Blog/DeleteBlog/@item.BlogID " class="btn btn-danger">Sil</a></td>
             <td><a href="#" class="btn btn-warning">Düzenle</a></td>
         </tr>
     }
