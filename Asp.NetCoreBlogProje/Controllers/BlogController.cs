@@ -17,6 +17,7 @@ namespace CoreDemo.Controllers
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
+        CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
@@ -36,13 +37,12 @@ namespace CoreDemo.Controllers
         [HttpGet]
         public IActionResult BlogAdd()
         {
-            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-            List<SelectListItem> categoryvalues =( from x in cm.GetList()
-                                                  select new SelectListItem
-                                                  {
-                                                      Text = x.CategoryName,
-                                                      Value = x.CategoryID.ToString()
-                                                 }).ToList();
+            List<SelectListItem> categoryvalues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString()
+                                                   }).ToList();
             ViewBag.cv = categoryvalues;
             return View();
         }
@@ -52,7 +52,7 @@ namespace CoreDemo.Controllers
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(p);
             if (results.IsValid)
-            { 
+            {
                 p.BlogStatus = true;
                 p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 p.WriterID = 1;
@@ -62,7 +62,7 @@ namespace CoreDemo.Controllers
             }
             else
             {
-                foreach(var item in results.Errors)
+                foreach (var item in results.Errors)
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
@@ -74,17 +74,29 @@ namespace CoreDemo.Controllers
             var blogvalue = bm.TGetById(id);
             bm.TDelete(blogvalue); //blogvalue göndermiş oldugumuz ıd ye karsılık olan satırın tamamını bulur 
             return RedirectToAction("BlogListByWriter");
-        
+
         }
         [HttpGet] //Sayfa yüklendiğinde bi verileri getir.
         public IActionResult EditBlog(int id)
         {
             var blogvalue = bm.TGetById(id);
+            List<SelectListItem> categoryvalues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString()
+                                                   }).ToList();
+            ViewBag.cv = categoryvalues;
             return View(blogvalue);
         }
         [HttpPost]
-        public  IActionResult EditBlog(Blog p)
+        public IActionResult EditBlog(Blog p)
         {
+            var blogValue = bm.TGetById(p.BlogID);
+            p.WriterID = 1;
+            p.BlogCreateDate = DateTime.Parse(blogValue.BlogCreateDate.ToShortDateString());
+            p.BlogStatus = true;
+            bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");
         }
     }
